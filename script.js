@@ -1,18 +1,33 @@
 // Assignment code here
-var password = document.getElementById("password");
-var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var passwordLength = 10;
-var password = ("");
+const alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const numbers = "0123456789";
+const symbols = "!@#$%^&*_-+=";
 
-for (var i = 0; i <= passwordLength; i++) {
-  var randomNumber = Math.floor(Math.random() * chars.length);
-  password +- chars.substring(randomNumber, randomNumber +1);
-}
+const password = document.getElementById("password");
+const length = document.getElementById("length");
+const incNumbers = document.getElementById("numbers");
+const incSymbols = document.getElementById("symbols");
 
-document.getElementById("password").value = password;
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
+
+generateBtn.addEventListener("click", () => {
+  let characters = alpha;
+  numbers.checked ? (characters += numbers) : "";
+  symbols.checked ? (characters += symbols) : "";
+  password.value = generatePassword(length.value, characters);
+});
+
+const generatePassword = (length, characters) => {
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    password += characters.charAt(
+      Math.floor(Math.random() * characters.length)
+    );
+  }
+  return password;
+};
 
 // Write password to the #password input
 function writePassword() {
